@@ -26,7 +26,6 @@ class AuthController extends Controller
         $user->tokens()->delete();
 
         $token = $user->createToken('user login')->plainTextToken;
-        // kalau ingin ada expired token ke config/scantum.php 
 
         return response([
             'user' => $user,
@@ -34,30 +33,30 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request) {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        $token = $user->createToken('user login')->plainTextToken;
-        return response([
-            'user' => $user,
-            'token' => $token
-        ]);
-    }
+    // public function register(Request $request) {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required'
+    //     ]);
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password)
+    //     ]);
+    //     $token = $user->createToken('user login')->plainTextToken;
+    //     return response([
+    //         'user' => $user,
+    //         'token' => $token
+    //     ]);
+    // }
 
-    public function logout(Request $request) {
-        $request->user()->tokens()->delete();
-        return response([
-            'message' => 'Logout success'
-        ]);
-    }
+    // public function logout(Request $request) {
+    //     $request->user()->tokens()->delete();
+    //     return response([
+    //         'message' => 'Logout success'
+    //     ]);
+    // }
 
     public function me(Request $request) {
         return response ([
