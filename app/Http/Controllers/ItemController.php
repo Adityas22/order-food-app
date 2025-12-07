@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 class ItemController extends Controller
 {
     //
+    public function index(){
+        $items = Item::all();
+        return response(['items' => $items]);
+    }
+    
     public function store(Request $request) {
         $request->validate([
             'name' => 'required',

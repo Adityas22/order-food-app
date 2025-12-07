@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Container\Attributes\Auth;
 
 // 
@@ -26,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/user', [UserController::class, 'store'])->middleware('role:3'); //manager
 
+    Route::get('/item', [ItemController::class, 'index'])->middleware('role:1,2,3,4');
     Route::post('/item', [ItemController::class, 'store'])->middleware('role:3'); //manager
     Route::post('/item/{id}', [ItemController::class, 'update'])->middleware('role:3'); //manager
+
+    Route::post('/order', [OrderController::class, 'store'])->middleware('role:1,3'); //waiters, manager
 });
